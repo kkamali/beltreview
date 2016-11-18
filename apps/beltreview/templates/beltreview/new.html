@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Book and Review</title>
+    </head>
+    <body>
+        <h3>Add a New Book Title and a Review:</h3>
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Home">
+        </form>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Log Out">
+        </form>
+        <hr>
+        <form action="{% url 'create' %}" method="post">
+            {% csrf_token %}
+            Book: <input type="text" name="title">
+            <p>
+            Author:
+            Choose from the list: <select name="author">
+                {% for author in authors %}
+                    <option value="{{author.first_name}} {{author.last_name}}">{{author.first_name}} {{author.last_name}}</option>
+                {% endfor %}
+            </select>
+            <p>
+            Or add a new author: <input type="text" name="author">
+            <p>
+            Review: <textarea name="review" rows="8" cols="40"></textarea>
+            <p>
+            Rating: <select name="stars">
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+                <option value="3.5">3.5</option>
+                <option value="4">4</option>
+                <option value="4.5">4.5</option>
+                <option value="5">5</option>
+            </select> stars
+            <p>
+            <input type="submit" name="submit" value="Add Book and Review">
+        </form>
+    </body>
+</html>

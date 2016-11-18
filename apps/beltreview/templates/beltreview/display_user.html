@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>User Reviews</title>
+    </head>
+    <body>
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Home">
+        </form>
+        <form action="{% url 'new' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Add A Book and Review">
+        </form>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Log Out">
+        </form>
+        <h2>User Alias: {{user.first_name}}</h2>
+        <p>Name: {{user.first_name}} {{user.last_name}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>Total Reviews: {{total_reviews}}</p>
+        <h3>Posted reviews on the following books: </h3>
+            {% if reviews %}
+                {% for review in reviews %}
+                    <a href="{% url 'display' review.book.pk %}">{{review.book.title}}</a>
+                {% endfor %}
+            {% else %}
+                This user has no reviews!
+            {% endif %}
+    </body>
+</html>
